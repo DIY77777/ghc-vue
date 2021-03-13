@@ -1,13 +1,16 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import axios from 'axios'
-import VueAxios from 'vue-axios'
+import Element from 'element-ui'
+import 'element-ui/lib/theme-chalk/index.css'
 import HelloWorld from '@/components/HelloWorld'
 import AppIndex from '@/components/AppIndex'
 import Login from '@/components/Login'
+import Home from '@/components/Home'
+import LibraryIndex from '@/components/library/LibraryIndex'
+import SideMenu from '@/components/library/SideMenu'
 
 Vue.use(Router)
-Vue.use(VueAxios, axios)
+Vue.use(Element)
 
 export default new Router({
   mode: 'history',
@@ -23,9 +26,31 @@ export default new Router({
       component: Login
     },
     {
-      path: '/index',
-      name: 'AppIndex',
-      component: AppIndex
+      path: '/sideMenu',
+      name: 'SideMenu',
+      component: SideMenu
+    },
+    {
+      path: '/home',
+      name: 'Home',
+      component: Home,
+      // Home页不需要被访问
+      redirect: '/index',
+      children: [
+        {
+          path: '/index',
+          name: 'AppIndex',
+          component: AppIndex,
+          meta: {
+            requireAuth: true
+          }
+        },
+        {
+          path: '/library',
+          name: 'LibraryIndex',
+          component: LibraryIndex
+        }
+      ]
     }
   ]
 })

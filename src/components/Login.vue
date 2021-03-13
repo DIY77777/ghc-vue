@@ -31,14 +31,26 @@ export default {
   },
   methods: {
     login () {
+      // eslint-disable-next-line no-unused-vars
+      // 1.点击登录按钮，向后端发送数据
+      // 2.收到后端的code值，然后触发store中的login方法，把loginForm对象传递给store中的user对象
+      var _this = this
       this.$axios.post('/login', {
-        username: this.username,
-        password: this.password
+        username: this.loginForm.username,
+        password: this.loginForm.password
       }).then(successResponse => {
         if (successResponse.data.code === 200) {
-          this.$router.replace({path: '/index'})
+          _this.$store.commit('login', _this.loginForm)
+          // eslint-disable-next-line no-unused-vars
+          // 得到保存的访问页面的值，不为空则跳转到该页面
+          var path = this.$route.query.redirect
+          this.$router.replace({path: path === '/' || path === undefined ? '/index' : path})
+        } else {
+          console.log('返回值不为200')
         }
-      }).catch(failResponse => {})
+      }).catch(failResponse => {
+        console.log('未请求成功')
+      })
     }
   }
 
