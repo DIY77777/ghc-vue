@@ -1,8 +1,8 @@
 <template>
+  <!--    @select="handleSelect"-->
   <el-menu
     class="categories"
     default-active="0"
-    @select="handleSelect"
     active-text-color="red">
     <el-menu-item index="0">
       <i class="el-icon-menu"></i>

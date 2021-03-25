@@ -5,19 +5,24 @@
       <SideMenu></SideMenu>
     </el-aside>
     <el-main>
-<!--      <books></books>-->
+      <Books class="books-area"></Books>
     </el-main>
   </el-container>
 </template>
 
 <script>
 import SideMenu from './SideMenu'
+import Books from './Books'
 export default {
   name: 'LibraryIndex',
-  components: {SideMenu}
+  components: {SideMenu, Books}
 }
 </script>
 
 <style scoped>
-
+  .books-area {
+    width: 990px;
+    margin-left: auto;
+    margin-right: auto;
+  }
 </style>
